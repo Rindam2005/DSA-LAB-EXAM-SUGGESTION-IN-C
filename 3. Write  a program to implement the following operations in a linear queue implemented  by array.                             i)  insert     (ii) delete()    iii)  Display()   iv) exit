@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 5
+
+int queue[MAX], front = -1, rear = -1;
+
+void insert() {
+    int val;
+    if (rear == MAX - 1) printf("\nQueue Overflow!");
+    else {
+        if (front == -1) front = 0;
+        printf("Enter element: ");
+        scanf("%d", &val);
+        queue[++rear] = val;
+    }
+}
+
+void delete() {
+    if (front == -1 || front > rear) printf("\nQueue Underflow!");
+    else printf("\nDeleted: %d", queue[front++]);
+}
+
+void display() {
+    if (front == -1 || front > rear) printf("\nQueue is empty!");
+    else {
+        for (int i = front; i <= rear; i++) printf("%d ", queue[i]);
+    }
+}
+
+int main() {
+    int ch;
+    while(1) {
+        printf("\n1.Insert 2.Delete 3.Display 4.Exit: ");
+        scanf("%d", &ch);
+        if(ch==4) break;
+        switch(ch) {
+            case 1: insert(); break;
+            case 2: delete(); break;
+            case 3: display(); break;
+        }
+    }
+    return 0;
+
+}
