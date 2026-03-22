@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* head = NULL;
+
+void insertBeg() {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    printf("Enter data: "); scanf("%d", &newNode->data);
+    newNode->next = head;
+    head = newNode;
+}
+
+void deleteBeg() {
+    if (!head) return;
+    struct Node* temp = head;
+    head = head->next;
+    free(temp);
+}
+
+void insertAfter() {
+    int target; printf("Insert after which value? "); scanf("%d", &target);
+    struct Node* temp = head;
+    while (temp && temp->data != target) temp = temp->next;
+    if (temp) {
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        printf("Enter data: "); scanf("%d", &newNode->data);
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+}
+
+void display() {
+    struct Node* temp = head;
+    while (temp) { printf("%d -> ", temp->data); temp = temp->next; }
+    printf("NULL\n");
+}
